@@ -29,7 +29,7 @@
 					"name": "SelectedColumn"
 				}
 			],
-			"script": "source(output(\n\t\tid as string,\n\t\tname as string,\n\t\tage as string,\n\t\trunningtotal as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Source\nSource window(asc(id, true),\n\tRunning = toString(sum(toInteger(runningtotal)))) ~> RunningTotal\nRunningTotal select(mapColumn(\n\t\tid,\n\t\tname,\n\t\tage,\n\t\tRunning\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectedColumn\nSelectedColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> SaveToOutputFolder"
+			"script": "source(output(\n\t\tid as string,\n\t\tname as string,\n\t\tage as string,\n\t\trunningtotal as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Source\nSource window(asc(id, true),\n\tRunning = toString(sum(toInteger(runningtotal)))) ~> RunningTotal\nRunningTotal select(mapColumn(\n\t\tid,\n\t\tname,\n\t\tage,\n\t\tRunning\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectedColumn\nSelectedColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['Incremental_RunningTotal.txt'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> SaveToOutputFolder"
 		}
 	}
 }
