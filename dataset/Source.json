@@ -21,19 +21,19 @@
 		},
 		"schema": [
 			{
-				"name": "Prop_0",
+				"name": "id",
 				"type": "String"
 			},
 			{
-				"name": "Prop_1",
+				"name": "name",
 				"type": "String"
 			},
 			{
-				"name": "Prop_2",
+				"name": "age",
 				"type": "String"
 			},
 			{
-				"name": "Prop_3",
+				"name": "runningtotal",
 				"type": "String"
 			}
 		]
