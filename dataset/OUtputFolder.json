@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Destination",
 				"folderPath": "Outbox",
 				"container": "adfstorage"
 			},
