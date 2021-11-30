@@ -1,0 +1,45 @@
+{
+	"name": "LogExecutionInFIle_append",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Source",
+						"type": "DatasetReference"
+					},
+					"name": "SourceData"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_logfile",
+						"type": "DatasetReference"
+					},
+					"name": "LogFIle"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SaveFileOutput",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddingColumns"
+				},
+				{
+					"name": "RemovingUnWantedColumns"
+				},
+				{
+					"name": "Union1"
+				}
+			],
+			"script": "parameters{\n\tadfName as string,\n\tpipelineName as string,\n\trunID as string,\n\ttriggerName as string,\n\tlogFileName as string\n}\nsource(output(\n\t\tid as string,\n\t\tname as string,\n\t\tage as string,\n\t\trunningtotal as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SourceData\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[('log/'+$logFileName)]) ~> LogFIle\nSourceData derive(adfName = $adfName,\n\t\tpipelineName = $pipelineName,\n\t\trunID = $runID,\n\t\ttriggerName = $triggerName) ~> AddingColumns\nAddingColumns select(mapColumn(\n\t\tadfName,\n\t\tpipelineName,\n\t\trunID,\n\t\ttriggerName\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemovingUnWantedColumns\nRemovingUnWantedColumns, LogFIle union(byName: true)~> Union1\nUnion1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($logFileName)],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}
