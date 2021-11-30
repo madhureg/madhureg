@@ -1,0 +1,41 @@
+{
+	"name": "Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Incremental.txt",
+				"folderPath": "inbox",
+				"container": "adfstorage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "Prop_1",
+				"type": "String"
+			},
+			{
+				"name": "Prop_2",
+				"type": "String"
+			},
+			{
+				"name": "Prop_3",
+				"type": "String"
+			}
+		]
+	}
+}
