@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "OUtputFolder",
+						"referenceName": "OutputFolder",
 						"type": "DatasetReference"
 					},
 					"name": "SaveToOutputFolder"
