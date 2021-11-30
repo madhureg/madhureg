@@ -1,5 +1,5 @@
 {
-	"name": "OUtputFolder",
+	"name": "OutputFolder",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AzureBlobStorage",
