@@ -1,9 +1,9 @@
 {
 	"name": "adfmadhurdemo",
-	"location": "westus",
+	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
-		"principalId": "e3707b14-eb37-43cd-b1ea-52334a590bd4",
-		"tenantId": "604c1504-c6a3-4080-81aa-b33091104187"
+		"principalId": "f843f343-a574-452a-b9d2-522a25c2c923",
+		"tenantId": "1e7cf846-b176-4c76-bb16-b84b16018d1b"
 	}
 }
